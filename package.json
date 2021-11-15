@@ -1,0 +1,28 @@
+{
+  "name": "login-system",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000l\u0000o\u0000g\u0000i\u0000n\u0000-\u0000s\u0000y\u0000s\u0000t\u0000e\u0000m\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Umut-Schweiz/login-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Umut-Schweiz/login-system/issues"
+  },
+  "homepage": "https://github.com/Umut-Schweiz/login-system#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
+  }
+}
