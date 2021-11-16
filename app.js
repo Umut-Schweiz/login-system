@@ -34,6 +34,12 @@ app.get("/", (req, res) => {
     res.render("index")
 });
 
+app.get("/register", (req, res) => {
+    //res.send("<h1>Home Page Started</h1>")
+    res.render("register")
+});
+
+
 app.listen(3000, () => {
     console.log("Server started on port")
 })
