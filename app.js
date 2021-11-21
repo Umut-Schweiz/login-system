@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const routes = require("./routes/pages");
 
 
-
 dotenv.config();
 
 const app = express();
@@ -26,7 +25,7 @@ app.use(express.urlencoded({extended: false }));
 //Parse JSON bodies (as sent by API clients)
 app.use(express.json())
 
-
+//Using hbs >> This will render .hbs files when res.render is called.
 app.set('view engine', 'hbs');
 
 db.connect((error) => {
