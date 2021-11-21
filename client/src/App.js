@@ -30,19 +30,14 @@ function App() {
   */
 
   return (
-    <MainContext.Provider /** value={data} */>
+    <MainContext.Provider  value={''}>
       <Router>
 
         <Routes>
-
-          
-
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-
-         
-
+                   
         </Routes>
 
       </Router>

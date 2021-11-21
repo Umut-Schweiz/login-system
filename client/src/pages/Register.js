@@ -1,68 +1,104 @@
-import React from "react";
+import { React, useState } from "react";
 import Navbar from "../components/Navbar";
+import * as userService from '../services/user'
 
 const Register = () => {
-    return (
 
+
+    const [newUser, setNewUser] = useState([]);
+    const [passwordConfirmError, setPasswordConfirmError] = useState(false);
+    const [userRegistered, setuserRegistered] = useState(false);
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log(newUser)
+
+        if (newUser.Password === newUser.ConfirmPassword) {
+            userService.registerUser(newUser)
+            setuserRegistered(true)
+            console.log(newUser)
+        }else {
+            setPasswordConfirmError(true)
+        }
+
+    };
+
+
+    return (
         <>
             <Navbar />
 
-            <div class="container mt-4">
-                <div class="card">
+            <div className="container mt-4">
 
-                    <div class="card-header">
+                <div className="card">
+
+                    <div className="card-header">
                         Register Form
                     </div>
 
-                    <div class="card-body">
-                        <form action="/auth/register" method="POST">
+                    <div className="card-body">
+                        <form onSubmit={handleSubmit}>
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
+                            <div className="mb-3">
+                                <label className="form-label">Name</label>
                                 <input
+                                    onChange={(e) =>
+                                        setNewUser({ ...newUser, Name: e.target.value })
+                                    }
                                     type="text"
-                                    class="form-control"
-                                    id="name"
-                                    name="name"
+                                    className="form-control"
+                                    name="Name"
                                 />
                             </div>
 
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
+                            <div className="mb-3">
+                                <label  className="form-label">Email Address</label>
                                 <input
+                                    onChange={(e) =>
+                                        setNewUser({ ...newUser, Email: e.target.value })
+                                    }
                                     type="email"
-                                    class="form-control"
-                                    id="email"
-                                    name="email"
+                                    className="form-control"
+                                    name="Email"
                                 />
                             </div>
 
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                            <div className="mb-3">
+                                <label className="form-label">Password</label>
                                 <input
+                                    onChange={(e) =>
+                                        setNewUser({ ...newUser, Password: e.target.value })
+                                    }
                                     type="password"
-                                    class="form-control"
-                                    id="password"
-                                    name="password"
+                                    className="form-control"
+                                    name="Password"
                                 />
                             </div>
 
-                            <div class="mb-3">
-                                <label for="passwordConfirm" class="form-label">Confirm Password</label>
+                            <div className="mb-3">
+                                <label className="form-label">Confirm Password</label>
                                 <input
+                                    onChange={(e) =>
+                                        setNewUser({ ...newUser, ConfirmPassword: e.target.value })
+                                    }
                                     type="password"
-                                    class="form-control"
-                                    id="passwordConfirm"
-                                    name="passwordConfirm"
+                                    className="form-control"
+                                    name="PasswordConfirm"
                                 />
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Register User</button>
+                            <button type="submit" className="btn btn-primary">Register User</button>
+
                         </form>
+
                     </div>
                 </div>
 
-                <h4 class="alert alert-danger mt-4">message</h4>
+                {passwordConfirmError ? <h4 className="alert alert-danger mt-4">Passwords do not match</h4> : ''}
+                {userRegistered ? <h4 className="alert alert-danger mt-4">User regisired</h4> : ''}
+
 
             </div>
         </>

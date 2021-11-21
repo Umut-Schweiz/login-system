@@ -1,8 +1,17 @@
-import React from "react";
+import { React, useState } from "react";
 import Navbar from "../components/Navbar";
-
+import * as userService from '../services/user'
 
 const Home = () => {
+
+  const [loginData, setLoginData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setUserData(userService.loginUser(loginData))
+  };
+
   return (
 
     <>
@@ -15,29 +24,33 @@ const Home = () => {
             Login Form
           </div>
 
-          <h5 class="alert alert-danger mt-4">message</h5>
+          {userData.error ? <h5 class="alert alert-danger mt-4">{userData.error}</h5> : '' }
 
           <div class="card-body">
-            
-            <form >
+
+            <form onSubmit={handleSubmit} >
 
               <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
+                <label class="form-label">Email Address</label>
                 <input
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, Email: e.target.value })
+                  }
                   type="email"
                   class="form-control"
-                  id="email"
-                  name="email"
+                  name="Email"
                 />
               </div>
 
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Password</label>
                 <input
+                  onChange={(e) =>
+                    setLoginData({ ...loginData, Email: e.target.value })
+                  }
                   type="password"
                   class="form-control"
-                  id="password"
-                  name="password"
+                  name="Password"
                 />
               </div>
 
