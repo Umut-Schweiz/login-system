@@ -1,41 +1,34 @@
-import express from 'express'
-import session from 'express-session'
+import express from "express"
+import bodyParser from "body-Parser"
+import cors from "cors"
 
 
-// Middlewares
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
-import helmet from 'helmet'
-import bodyParser from 'body-parser'
-
-
-import router from './routes/auth.js'
+// Routers
+import userRouter from './routes/auth.routes.js'
 
 const app = express();
-const rout = express.Router();
 
-//Parse URL -encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded({extended: false }));
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
-app.use(bodyParser.urlencoded({extended : true}));
+const corsOptions = {
+  origin: "http://localhost:8001"
+};
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
 app.use(bodyParser.json());
-//Parse JSON bodies (as sent by API clients)
-app.use(express.json())
-app.use(helmet())
-app.use(cookieParser())
-app.use(cors())
 
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// simple test route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to this application." });
+});
 
-app.use('/auth', router);
+app.use('/auth', userRouter)
 
-
-app.listen(4000, () => {
-    console.log("Server started on port")
-})
-
-
+// set port, listen for requests
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});

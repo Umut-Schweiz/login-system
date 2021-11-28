@@ -1,9 +1,25 @@
-import express from 'express'
+import express from 'express';
 
-import registerController from '../controllers/auth.js'
+import  verifySignUp  from "../middleware/verifySignUp.js"
+import controller from "../controllers/auth.controller.js"
 
 const router = express.Router();
 
-router.post('/register', registerController )
+router.use((req, res, next) => {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+});
+
+router.post("/signup",
+    [
+      verifySignUp.checkDuplicateUsernameOrEmail,
+    ],
+    controller.signup
+  );
+
+router.post("/signin", controller.signin);
 
 export default router
