@@ -15,7 +15,7 @@ const Register = () => {
 
         console.log(newUser)
 
-        if (newUser.Password === newUser.ConfirmPassword) {
+        if (newUser.Password === newUser.PasswordConfirm) {
             userService.registerUser(newUser)
             setuserRegistered(true)
             console.log(newUser)
@@ -78,10 +78,10 @@ const Register = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Confirm Password</label>
+                                <label className="form-label">Password Confirm </label>
                                 <input
                                     onChange={(e) =>
-                                        setNewUser({ ...newUser, ConfirmPassword: e.target.value })
+                                        setNewUser({ ...newUser, PasswordConfirm: e.target.value })
                                     }
                                     type="password"
                                     className="form-control"

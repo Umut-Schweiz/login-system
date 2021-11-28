@@ -46,7 +46,7 @@ const Home = () => {
                 <label class="form-label">Password</label>
                 <input
                   onChange={(e) =>
-                    setLoginData({ ...loginData, Email: e.target.value })
+                    setLoginData({ ...loginData, Password: e.target.value })
                   }
                   type="password"
                   class="form-control"
